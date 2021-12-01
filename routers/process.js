@@ -18,7 +18,7 @@ router.get("/process/teacher/:teacherId", getProcessTeacher);
 
 router.post("/progress/create", createProcess);
 
-router.put("/process/edit/:id", updateProcess);
+router.put("/process/update/:id", updateProcess);
 
 router.delete("/process/delete/:id", deleteProcess);
 

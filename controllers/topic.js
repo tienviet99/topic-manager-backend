@@ -10,6 +10,32 @@ export const getTopic = async (req, res) => {
   }
 };
 
+export const searchTopic = async (req, res) => {
+  try {
+    const params = req.body.keyword;
+    const topic = await TopicModel.find({
+      $or: [
+        { topicId: { $regex: params } },
+        { name: { $regex: params } },
+        { major: { $regex: params } },
+        { teacherName: { $regex: params } },
+      ],
+    });
+    res.status(200).json(topic);
+  } catch (error) {
+    res.status(500).json({ err: error });
+  }
+};
+
+export const searchTopicStatus = async (req, res) => {
+  try {
+    const topic = await TopicModel.find({ status: req.params.status });
+    res.status(200).json(topic);
+  } catch (error) {
+    res.status(500).json({ err: error });
+  }
+};
+
 export const createTopic = async (req, res) => {
   try {
     const newTopic = req.body;

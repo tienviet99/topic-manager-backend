@@ -15,7 +15,7 @@ router.get("/task/list/:processId", getTaskByProcessId);
 
 router.post("/task/create", createTask);
 
-router.put("/task/edit/:id", updateTask);
+router.put("/task/update/:id", updateTask);
 
 router.delete("/task/delete/:id", deleteTask);
 

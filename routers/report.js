@@ -13,7 +13,7 @@ router.get("/report/list", getReport);
 
 router.get("/report/list/:taskId", getReportByTaskId);
 
-router.put("/report/edit/:id", updateReport);
+router.put("/report/update/:id", updateReport);
 
 router.post("/report/create", createReport);
 

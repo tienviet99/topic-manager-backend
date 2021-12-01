@@ -22,10 +22,17 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    completeTopic: {
+    password: {
       type: String,
-      ref: "Topic",
+      required: true,
+      default: "admin123",
     },
+    completeTopic: [
+      {
+        type: String,
+        ref: "Topic",
+      },
+    ],
   },
   { timestamps: true }
 );
