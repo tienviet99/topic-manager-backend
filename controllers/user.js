@@ -12,7 +12,9 @@ export const getUser = async (req, res) => {
 
 export const getUserById = async (req, res) => {
   try {
-    const user = await UserModel.findById(req.params.id);
+    const user = await UserModel.find({ _id: req.params.id }).populate(
+      "completeTopic"
+    );
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ err: error });
