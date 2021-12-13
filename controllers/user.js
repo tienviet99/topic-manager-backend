@@ -1,4 +1,5 @@
 import { UserModel } from "../models/UserModel.js";
+const bcrypt = await import ("bcrypt");
 
 export const getUser = async (req, res) => {
   try {
@@ -54,8 +55,13 @@ export const createUser = async (req, res) => {
   try {
     const newUser = req.body;
     const user = new UserModel(newUser);
+    const salt = await bcrypt.genSalt(9)
+    user.password = await bcrypt.hash(user.password, salt);
     await user.save();
     res.status(200).json(user);
+
+    const validPassword = await bcrypt.compare("abcxyz123", user.password)
+    console.log("validPassword: ", validPassword);
   } catch (error) {
     res.status(500).json({ err: error });
   }
