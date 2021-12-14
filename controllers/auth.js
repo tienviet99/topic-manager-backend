@@ -1,7 +1,9 @@
 import { UserModel } from "../models/UserModel.js";
-const bcrypt = await import ("bcrypt");
-const jwt = await import ("jsonwebtoken");
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { v1 } from "uuid";
 
+const uuidv1 = v1;
 export const login =  async (req, res) => {
   try {
     const body = req.body;
@@ -9,7 +11,9 @@ export const login =  async (req, res) => {
     if (user) {
       const validPassword = await bcrypt.compare(body.password, user.password)
       if (validPassword) {
-        res.status(200).json({ message: "Valid Password"})
+        const secret = uuidv1();
+        const token = jwt.sign({_id: user._id, role: user.role}, `${secret}`)
+        return res.status(200).json({token, secret});
       } else {
         res.status(400).json({error: "Invalid Password, Please try again"})
       }

@@ -6,6 +6,7 @@ import user from "./routers/user.js";
 import process from "./routers/process.js";
 import task from "./routers/task.js";
 import report from "./routers/report.js";
+import auth from "./routers/auth.js"
 import mongoose from "mongoose";
 
 const app = express();
@@ -21,6 +22,7 @@ app.use("/api", user);
 app.use("/api", process);
 app.use("/api", task);
 app.use("/api", report);
+app.use("/api", auth);
 
 mongoose
   .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
