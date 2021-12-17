@@ -2,7 +2,7 @@ import { TopicModel } from "../models/TopicModel.js";
 
 export const getTopic = async (req, res) => {
   try {
-    const topics = await TopicModel.find();
+    const topics = await TopicModel.find().populate("teacherId");
     console.log("topics :", topics);
     res.status(200).json(topics);
   } catch (error) {
@@ -20,7 +20,7 @@ export const searchTopic = async (req, res) => {
         { major: { $regex: params } },
         { teacherName: { $regex: params } },
       ],
-    });
+    }).populate("teacherId");
     res.status(200).json(topic);
   } catch (error) {
     res.status(500).json({ err: error });
@@ -29,7 +29,7 @@ export const searchTopic = async (req, res) => {
 
 export const searchTopicStatus = async (req, res) => {
   try {
-    const topic = await TopicModel.find({ status: req.params.status });
+    const topic = await TopicModel.find({ status: req.params.status }).populate("teacherId");
     res.status(200).json(topic);
   } catch (error) {
     res.status(500).json({ err: error });

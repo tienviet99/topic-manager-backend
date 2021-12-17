@@ -10,9 +10,9 @@ const topicSchema = new mongooes.Schema(
       type: String,
       required: true,
     },
-    teacherName: {
+    teacherId: {
       type: String,
-      required: true,
+      ref: "User",
     },
     start_date: {
       type: String,
