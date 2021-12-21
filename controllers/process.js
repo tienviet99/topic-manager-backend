@@ -8,7 +8,6 @@ export const getProcessStudent = async (req, res) => {
       .populate("studentId")
       .populate("teacherId")
       .populate("topicId");
-    console.log("process: ", process);
     res.status(200).json(process);
   } catch (error) {
     res.status(500).json({ err: error });
@@ -23,7 +22,6 @@ export const getProcessTeacher = async (req, res) => {
       .populate("studentId")
       .populate("teacherId")
       .populate("topicId");
-    console.log("process: ", process);
     res.status(200).json(process);
   } catch (error) {
     res.status(500).json({ err: error });
@@ -37,7 +35,6 @@ export const getProcess = async (req, res) => {
       .populate("teacherId")
       .populate("topicId");
 
-    console.log("process: ", process);
     res.status(200).json(process);
   } catch (error) {
     res.status(500).json({ err: error });

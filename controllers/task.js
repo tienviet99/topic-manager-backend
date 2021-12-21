@@ -3,7 +3,6 @@ import { TaskModel } from "../models/TaskModel.js";
 export const getTask = async (req, res) => {
   try {
     const task = await TaskModel.find().populate("processId");
-    console.log("task: ", task);
     res.status(200).json(task);
   } catch (error) {
     res.status(500).json({ err: error });
@@ -15,7 +14,6 @@ export const getTaskByProcessId = async (req, res) => {
     const task = await TaskModel.find({
       processId: req.params.processId,
     }).populate("processId");
-    console.log("task: ", task);
     res.status(200).json(task);
   } catch (error) {
     res.status(500).json({ err: error });

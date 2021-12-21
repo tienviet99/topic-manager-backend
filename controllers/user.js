@@ -4,7 +4,6 @@ import bcrypt from "bcrypt";
 export const getUser = async (req, res) => {
   try {
     const users = await UserModel.find().populate("completeTopic");
-    console.log("user :", users);
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ err: error });
@@ -61,7 +60,6 @@ export const createUser = async (req, res) => {
     res.status(200).json(user);
 
     const validPassword = await bcrypt.compare("abcxyz123", user.password)
-    console.log("validPassword: ", validPassword);
   } catch (error) {
     res.status(500).json({ err: error });
   }

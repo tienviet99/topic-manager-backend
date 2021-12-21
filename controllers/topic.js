@@ -3,12 +3,20 @@ import { TopicModel } from "../models/TopicModel.js";
 export const getTopic = async (req, res) => {
   try {
     const topics = await TopicModel.find().populate("teacherId");
-    console.log("topics :", topics);
     res.status(200).json(topics);
   } catch (error) {
     res.status(500).json({ err: error });
   }
 };
+
+export const getTopicById = async (req, res) => {
+  try {
+    const topics = await TopicModel.find({ _id: req.params.id}).populate("teacherId");
+    res.status(200).json(topics)
+  } catch (error) {
+    res.status(500).json({err: error});
+  }
+}
 
 export const searchTopic = async (req, res) => {
   try {

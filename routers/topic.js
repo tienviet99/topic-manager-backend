@@ -6,6 +6,7 @@ import {
   deleteTopic,
   searchTopic,
   searchTopicStatus,
+  getTopicById,
 } from "../controllers/topic.js";
 
 const router = express.Router();
@@ -21,5 +22,7 @@ router.delete("/topic/delete/:id", deleteTopic);
 router.post("/topic/search", searchTopic);
 
 router.get("/topic/searchstatus/:status", searchTopicStatus);
+
+router.get("/topic/:id", getTopicById);
 
 export default router;

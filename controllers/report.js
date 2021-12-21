@@ -4,7 +4,6 @@ export const getReport = async (req, res) => {
   try {
     const report = await ReportModel.find().populate("taskId");
     res.status(200).json(report);
-    console.log("report: ", report);
   } catch (error) {
     res.status(500).json({ err: error });
   }
@@ -15,7 +14,6 @@ export const getReportByTaskId = async (req, res) => {
     const report = await ReportModel.find({
       taskId: req.params.taskId,
     }).populate("taskId");
-    console.log("report: ", report);
     res.status(200).json(report);
   } catch (error) {
     res.status(500).json({ err: error });
