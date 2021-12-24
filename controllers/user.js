@@ -58,8 +58,6 @@ export const createUser = async (req, res) => {
     user.password = await bcrypt.hash(user.password, salt);
     await user.save();
     res.status(200).json(user);
-
-    const validPassword = await bcrypt.compare("abcxyz123", user.password)
   } catch (error) {
     res.status(500).json({ err: error });
   }

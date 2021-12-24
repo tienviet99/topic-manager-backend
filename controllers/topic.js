@@ -11,7 +11,7 @@ export const getTopic = async (req, res) => {
 
 export const getTopicById = async (req, res) => {
   try {
-    const topics = await TopicModel.find({ _id: req.params.id}).populate("teacherId");
+    const topics = await TopicModel.findById({ _id: req.params.id}).populate("teacherId");
     res.status(200).json(topics)
   } catch (error) {
     res.status(500).json({err: error});

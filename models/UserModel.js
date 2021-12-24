@@ -1,29 +1,33 @@
-import mongoose from "mongoose";
+import mongooses from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const userSchema = new mongooses.Schema(
   {
     userId: {
       type: String,
       required: true,
       unique: true,
-      trim: true
+      trim: true,
     },
     name: {
       type: String,
-      trim: true
+      required: true,
+      trim: true,
     },
     date: {
       type: String,
+      required: true,
     },
     phone: {
       type: String,
+      required: true,
     },
     major: {
       type: String,
+      required: true,
     },
     role: {
       type: Number,
-      default: 0,
+      required: true,
     },
     password: {
       type: String,
@@ -31,12 +35,12 @@ const userSchema = new mongoose.Schema(
     },
     completeTopic: [
       {
-        type: String,
-        ref: "Topic",
+      type: String,
+      ref: "Topic",
       },
-    ],
+    ]
   },
-  { timestamps: true }
-);
+  {timestamps: true}
+)
 
-export const UserModel = mongoose.model("User", userSchema);
+export const UserModel = mongooses.model("User",userSchema)
