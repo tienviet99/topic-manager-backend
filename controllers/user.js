@@ -6,29 +6,29 @@ export const getUser = async (req, res) => {
     const users = await UserModel.find().populate("completeTopic");
     res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
 export const getUserById = async (req, res) => {
   try {
-    const user = await UserModel.find({ _id: req.params.id }).populate(
+    const user = await UserModel.findById({ _id: req.params.id }).populate(
       "completeTopic"
     );
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
 export const getUserByUserId = async (req, res) => {
   try {
-    const user = await UserModel.find({ userId: req.params.keyword }).populate(
+    const user = await UserModel.findOne({ userId: req.params.keyword }).populate(
       "completeTopic"
     );
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -46,7 +46,7 @@ export const searchUser = async (req, res) => {
     }).populate("completeTopic");
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -59,7 +59,7 @@ export const createUser = async (req, res) => {
     await user.save();
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -75,7 +75,7 @@ export const updateUser = async (req, res) => {
     );
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -85,6 +85,6 @@ export const deleteUser = async (req, res) => {
     user.remove();
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };

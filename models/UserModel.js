@@ -17,6 +17,9 @@ const userSchema = new mongooses.Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+    },
     phone: {
       type: String,
       required: true,

@@ -5,7 +5,7 @@ export const getTask = async (req, res) => {
     const task = await TaskModel.find().populate("processId");
     res.status(200).json(task);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -16,7 +16,7 @@ export const getTaskByProcessId = async (req, res) => {
     }).populate("processId");
     res.status(200).json(task);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -34,7 +34,7 @@ export const createTask = async (req, res) => {
 
     res.status(200).json(task);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -50,7 +50,7 @@ export const updateTask = async (req, res) => {
     );
     res.status(200).json(task);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -60,6 +60,6 @@ export const deleteTask = async (req, res) => {
     task.remove();
     res.status(200).json(task);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };

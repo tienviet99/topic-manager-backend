@@ -5,7 +5,7 @@ export const getReport = async (req, res) => {
     const report = await ReportModel.find().populate("taskId");
     res.status(200).json(report);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -16,7 +16,7 @@ export const getReportByTaskId = async (req, res) => {
     }).populate("taskId");
     res.status(200).json(report);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -27,7 +27,7 @@ export const createReport = async (req, res) => {
     await report.save();
     res.status(200).json(report);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -43,7 +43,7 @@ export const updateReport = async (req, res) => {
     );
     res.status(200).json(report);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -53,6 +53,6 @@ export const deleteReport = async (req, res) => {
     report.remove();
     res.status(200).json(report);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };

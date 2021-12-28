@@ -5,7 +5,7 @@ export const getTopic = async (req, res) => {
     const topics = await TopicModel.find().populate("teacherId");
     res.status(200).json(topics);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -26,12 +26,11 @@ export const searchTopic = async (req, res) => {
         { topicId: { $regex: params } },
         { name: { $regex: params } },
         { major: { $regex: params } },
-        { teacherName: { $regex: params } },
       ],
     }).populate("teacherId");
     res.status(200).json(topic);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -40,7 +39,7 @@ export const searchTopicStatus = async (req, res) => {
     const topic = await TopicModel.find({ status: req.params.status }).populate("teacherId");
     res.status(200).json(topic);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -52,7 +51,7 @@ export const createTopic = async (req, res) => {
     await topic.save();
     res.status(200).json(topic);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -70,7 +69,7 @@ export const updateTopic = async (req, res) => {
 
     res.status(200).json(topic);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -81,6 +80,6 @@ export const deleteTopic = async (req, res) => {
 
     res.status(200).json(topic);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };

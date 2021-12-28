@@ -10,7 +10,7 @@ export const getProcessStudent = async (req, res) => {
       .populate("topicId");
     res.status(200).json(process);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -24,7 +24,7 @@ export const getProcessTeacher = async (req, res) => {
       .populate("topicId");
     res.status(200).json(process);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -37,7 +37,7 @@ export const getProcess = async (req, res) => {
 
     res.status(200).json(process);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -48,7 +48,7 @@ export const createProcess = async (req, res) => {
     await process.save();
     res.status(200).json(process);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -64,7 +64,7 @@ export const updateProcess = async (req, res) => {
     );
     res.status(200).json(process);
   } catch (error) {
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };
 
@@ -74,6 +74,6 @@ export const deleteProcess = async (req, res) => {
     topic.remove();
     res.status(200).json(process);
   } catch (error) { 
-    res.status(500).json({ err: error });
+    res.status(500).json(`${error}`);
   }
 };

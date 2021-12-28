@@ -6,6 +6,7 @@ const topicSchema = new mongooes.Schema(
       type: String,
       required: true,
       unique: true,
+      trim: true,
     },
     name: {
       type: String,
@@ -24,6 +25,10 @@ const topicSchema = new mongooes.Schema(
       required: true,
     },
     description: {
+      type: String,
+      required: true,
+    },
+    requirements: {
       type: String,
       required: true,
     },

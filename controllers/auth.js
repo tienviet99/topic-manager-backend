@@ -21,6 +21,6 @@ export const login =  async (req, res) => {
       res.status(401).json({error: "Error Password . Please try again"})
     }
   } catch (error) {
-    res.status(500).json({ err: error })
+    res.status(500).json(`${error}`)
   }
 }
