@@ -30,12 +30,36 @@ export const getProcessTeacher = async (req, res) => {
 
 export const getProcess = async (req, res) => {
   try {
-    const process = await ProcessModel.find()
-      .populate("studentId")
-      .populate("teacherId")
-      .populate("topicId");
-
-    res.status(200).json(process);
+    const process = [];
+    const processAll = await ProcessModel.find();
+    // const processBeta = processAll.map(async(item) => {
+    //   if (item.studentId) {
+    //     const processAlpha = await ProcessModel
+    //       .findOne({studentId: item.studentId})
+    //       .populate("studentId")
+    //       .populate("teacherId")
+    //       .populate("topicId");
+    //     return processAlpha
+    //   } else{
+    //     const processAlpha = await ProcessModel
+    //       .findOne({studentId: item.studentId})
+    //       .populate("teacherId")
+    //       .populate("topicId");
+    //     return processAlpha
+    //   }
+    // })
+    const b = processAll.filter(async function(item){
+      if (item.studentId) {
+        const processAlpha = await ProcessModel
+          .findOne({studentId: item.studentId})
+          .populate("studentId")
+          .populate("teacherId")
+          .populate("topicId");
+          return processAlpha;
+      }
+    })
+    console.log("b: ",b);
+    res.status(200).json(b);
   } catch (error) {
     res.status(500).json(`${error}`);
   }
