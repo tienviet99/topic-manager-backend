@@ -96,8 +96,7 @@ export const deleteTopic = async (req, res) => {
     topic.remove();
     res.status(200).json(topic);
 
-    const process = await ProcessModel.findOneAndDelete({topicId: req.params.id});
-    console.log('process: ',process);
+    await ProcessModel.findOneAndDelete({topicId: req.params.id});
   } catch (error) {
     res.status(500).json(`${error}`);
   }

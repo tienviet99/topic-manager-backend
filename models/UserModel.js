@@ -17,7 +17,7 @@ const userSchema = new mongooses.Schema(
       type: String,
       required: true,
     },
-    image: {
+    email: {
       type: String,
     },
     phone: {

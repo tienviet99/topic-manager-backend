@@ -1,5 +1,6 @@
 import { UserModel } from "../models/UserModel.js";
 import bcrypt from "bcrypt";
+import { ProcessModel } from "../models/ProcessModel.js";
 
 export const getUser = async (req, res) => {
   try {
@@ -84,6 +85,20 @@ export const deleteUser = async (req, res) => {
     const user = await UserModel.findById(req.params.id);
     user.remove();
     res.status(200).json(user);
+
+    await ProcessModel.findOneAndDelete({ teacherId: req.params.id})
+    const updateProcess = {
+      studentId: '',
+      point: 0,
+      percent: 0,
+    }
+    await ProcessModel.findOneAndUpdate(
+      { studentId:req.params.id },
+      updateProcess,
+      {
+        new: true,
+      }
+      )
   } catch (error) {
     res.status(500).json(`${error}`);
   }

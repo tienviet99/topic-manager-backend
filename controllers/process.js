@@ -19,7 +19,19 @@ export const getProcessTeacher = async (req, res) => {
     const process = await ProcessModel.find({
       teacherId: req.params.teacherId,
     })
-      .populate("studentId")
+      .populate("teacherId")
+      .populate("topicId");
+    res.status(200).json(process);
+  } catch (error) {
+    res.status(500).json(`${error}`);
+  }
+};
+
+export const getProcessById = async (req, res) => {
+  try {
+    const process = await ProcessModel.findOne({
+      _id: req.params.id,
+    })
       .populate("teacherId")
       .populate("topicId");
     res.status(200).json(process);
@@ -30,8 +42,10 @@ export const getProcessTeacher = async (req, res) => {
 
 export const getProcess = async (req, res) => {
   try {
-    const process = [];
-    const processAll = await ProcessModel.find();
+    const processAll = await ProcessModel.find()
+      .populate("teacherId")
+      .populate("topicId");
+    // const process = [];
     // const processBeta = processAll.map(async(item) => {
     //   if (item.studentId) {
     //     const processAlpha = await ProcessModel
@@ -48,18 +62,18 @@ export const getProcess = async (req, res) => {
     //     return processAlpha
     //   }
     // })
-    const b = processAll.filter(async function(item){
-      if (item.studentId) {
-        const processAlpha = await ProcessModel
-          .findOne({studentId: item.studentId})
-          .populate("studentId")
-          .populate("teacherId")
-          .populate("topicId");
-          return processAlpha;
-      }
-    })
-    console.log("b: ",b);
-    res.status(200).json(b);
+    // const b = processAll.filter(async function(item){
+    //   if (item.studentId) {
+    //     const processAlpha = await ProcessModel
+    //       .findOne({studentId: item.studentId})
+    //       .populate("studentId")
+    //       .populate("teacherId")
+    //       .populate("topicId");
+    //       return processAlpha;
+    //   }
+    // })
+    // console.log("b: ",b);
+    res.status(200).json(processAll);
   } catch (error) {
     res.status(500).json(`${error}`);
   }
@@ -97,7 +111,7 @@ export const deleteProcess = async (req, res) => {
     const topic = await ProcessModel.findById(req.params.id);
     topic.remove();
     res.status(200).json(process);
-  } catch (error) { 
+  } catch (error) {
     res.status(500).json(`${error}`);
   }
 };

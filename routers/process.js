@@ -3,6 +3,7 @@ import {
   createProcess,
   deleteProcess,
   getProcess,
+  getProcessById,
   getProcessStudent,
   getProcessTeacher,
   updateProcess,
@@ -15,6 +16,8 @@ router.get("/process/list", getProcess);
 router.get("/process/student/:studentId", getProcessStudent);
 
 router.get("/process/teacher/:teacherId", getProcessTeacher);
+
+router.get("/process/:id", getProcessById);
 
 router.post("/progress/create", createProcess);
 
