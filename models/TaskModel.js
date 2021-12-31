@@ -18,7 +18,7 @@ const taskSchema = new monogoose.Schema(
       type: String,
       required: true,
     },
-    description: {
+    requirements: {
       type: String,
       required: true,
     },
