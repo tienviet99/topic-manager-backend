@@ -1,5 +1,9 @@
 import { TaskModel } from "../models/TaskModel.js";
 
+export const validatePercent = (percent, totalPercent) => {
+  return parseInt(`${percent}`) > parseInt(`${totalPercent}`);
+};
+
 export const getTask = async (req, res) => {
   try {
     const task = await TaskModel.find().populate("processId");
@@ -25,7 +29,7 @@ export const createTask = async (req, res) => {
     const newTask = req.body;
     const task = new TaskModel(newTask);
 
-    if (newTask.completePercent > newTask.totalPercent) {
+    if (validatePercent(newTask.completePercent, newTask.totalPercent)) {
       return res.status(400).json({
         error:
           "Path `completePercent` is more than maximum allowed value `totalPercent`.",
@@ -41,14 +45,22 @@ export const createTask = async (req, res) => {
 export const updateTask = async (req, res) => {
   try {
     const updateTask = req.body;
-    const task = await TaskModel.findOneAndUpdate(
-      { _id: req.params.id },
-      updateTask,
-      {
-        new: true,
-      }
-    );
-    res.status(200).json(task);
+
+    if (validatePercent(updateTask.completePercent, updateTask.totalPercent)) {
+      return res.status(400).json({
+        error:
+          "Path `completePercent` is more than maximum allowed value `totalPercent`.",
+      });
+    } else {
+      const task = await TaskModel.findOneAndUpdate(
+        { _id: req.params.id },
+        updateTask,
+        {
+          new: true,
+        }
+      );
+      res.status(200).json(task);
+    }
   } catch (error) {
     res.status(500).json(`${error}`);
   }

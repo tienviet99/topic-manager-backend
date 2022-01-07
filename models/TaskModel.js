@@ -6,31 +6,25 @@ const taskSchema = new monogoose.Schema(
       type: String,
       ref: "Process",
     },
-    title: {
+    name: {
       type: String,
-      required: true,
+      // required: true,
     },
-    start_day: {
+    start_date: {
       type: String,
-      required: true,
+      // required: true,
     },
-    end_day: {
+    end_date: {
       type: String,
-      required: true,
+      // required: true,
     },
     requirements: {
       type: String,
-      required: true,
-    },
-    point: {
-      type: Number,
-      required: true,
-      default: 0,
-      max: 100,
+      // required: true,
     },
     totalPercent: {
       type: Number,
-      required: true,
+      // required: true,
       default: 0,
       max: 100,
     },
