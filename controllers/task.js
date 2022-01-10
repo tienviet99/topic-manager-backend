@@ -13,6 +13,17 @@ export const getTask = async (req, res) => {
   }
 };
 
+export const getTaskById = async (req, res) => {
+  try {
+    const task = await TaskModel.findById({ _id: req.params.id }).populate(
+      "processId"
+    );
+    res.status(200).json(task);
+  } catch (error) {
+    res.status(500).json(`${error}`);
+  }
+};
+
 export const getTaskByProcessId = async (req, res) => {
   try {
     const task = await TaskModel.find({
