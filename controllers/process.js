@@ -45,34 +45,6 @@ export const getProcess = async (req, res) => {
     const processAll = await ProcessModel.find()
       .populate("teacherId")
       .populate("topicId");
-    // const process = [];
-    // const processBeta = processAll.map(async(item) => {
-    //   if (item.studentId) {
-    //     const processAlpha = await ProcessModel
-    //       .findOne({studentId: item.studentId})
-    //       .populate("studentId")
-    //       .populate("teacherId")
-    //       .populate("topicId");
-    //     return processAlpha
-    //   } else{
-    //     const processAlpha = await ProcessModel
-    //       .findOne({studentId: item.studentId})
-    //       .populate("teacherId")
-    //       .populate("topicId");
-    //     return processAlpha
-    //   }
-    // })
-    // const b = processAll.filter(async function(item){
-    //   if (item.studentId) {
-    //     const processAlpha = await ProcessModel
-    //       .findOne({studentId: item.studentId})
-    //       .populate("studentId")
-    //       .populate("teacherId")
-    //       .populate("topicId");
-    //       return processAlpha;
-    //   }
-    // })
-    // console.log("b: ",b);
     res.status(200).json(processAll);
   } catch (error) {
     res.status(500).json(`${error}`);
